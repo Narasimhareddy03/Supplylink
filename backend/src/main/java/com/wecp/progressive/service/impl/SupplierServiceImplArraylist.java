@@ -1,36 +1,38 @@
 package com.wecp.progressive.service.impl;
 
+import com.wecp.progressive.entity.Supplier;
+import com.wecp.progressive.service.SupplierService;
+import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import com.wecp.progressive.entity.Supplier;
-import com.wecp.progressive.service.SupplierService;
+@Service
+public class SupplierServiceImplArraylist implements SupplierService {
 
-public class SupplierServiceImplArraylist implements SupplierService  {
-List<Supplier> suppliersList;
+    private static List<Supplier> supplierList = new ArrayList<>();
 
     @Override
     public List<Supplier> getAllSuppliers() {
-        return suppliersList;
+        return supplierList;
     }
 
     @Override
     public int addSupplier(Supplier supplier) {
-        suppliersList.add(supplier);
-        return supplier.getSupplierId();
-           
+        supplierList.add(supplier);
+        return supplierList.size();
     }
 
     @Override
     public List<Supplier> getAllSuppliersSortedByName() {
-Collections.sort(suppliersList);  
-return suppliersList;  
-}
+        List<Supplier> sortedSupplier = supplierList;
+        sortedSupplier.sort(Comparator.comparing(Supplier::getSupplierName)); // Sort by supplier name
+        return sortedSupplier;
+    }
 
-public void emptyArrayList(){
-    suppliersList = new ArrayList<>();
-}
-
+    @Override
+    public void emptyArrayList() {
+        supplierList = new ArrayList<>();
+    }
 }

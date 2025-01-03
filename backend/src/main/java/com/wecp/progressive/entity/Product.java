@@ -1,5 +1,8 @@
 package com.wecp.progressive.entity;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Product {
     private int productId;
     private int warehouseId;
